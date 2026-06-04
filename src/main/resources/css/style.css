@@ -1,0 +1,47 @@
+/* Variáveis globais de cores com acabamento fosco */
+.root {
+    -fx-cinza-fosco-escuro: #3A3B3C;
+    -fx-cinza-fosco-medio: #808080;
+    -fx-cinza-fosco-claro: #A9A9A9;
+    -fx-borda-suave: #d0d8f0;
+}
+
+/* Títulos das seções em destaque */
+.titulo-secao {
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cinza-fosco-escuro;
+    -fx-font-size: 13px;
+}
+
+/* O botão calcular profissionalizado */
+.botao-calcular {
+    -fx-background-color: -fx-cinza-fosco-medio;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 4px;
+}
+
+.botao-calcular:hover {
+    -fx-background-color: #696969; /* Efeito ao passar o mouse */
+    -fx-cursor: hand;
+}
+
+/* O bloco de resumo que estava hardcoded no seu Java */
+.bloco-resumo {
+    -fx-border-color: -fx-borda-suave;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    /* Descomente a linha abaixo se quiser aplicar o fundo cinza claro fosco */
+    /* -fx-background-color: -fx-cinza-fosco-claro; */
+}
+
+/* Destacando os labels de preço final */
+.label-destaque {
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-cinza-fosco-escuro;
+}
+
+.contorno-secoes{
+     -fx-border-color: #d0d8f0;
+}    -fx-border-radius: 6;
