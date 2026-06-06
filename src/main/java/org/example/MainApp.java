@@ -21,6 +21,7 @@ public class MainApp extends Application {
     private ComboBox<String> comboMaterial;
     private ComboBox<String> comboDensidade;
     private TextField txtPeso;
+    private TextField txtHorasUsadas;
     private TextField txtTempo;
     private TextField txtMaoDeObra;
     private TextField txtMargem;
@@ -133,6 +134,7 @@ public class MainApp extends Application {
         comboDensidade.setMaxWidth(Double.MAX_VALUE);
 
         txtPeso      = new TextField(); txtPeso.setPromptText("Peso (g)");
+        txtHorasUsadas = new TextField(); txtHorasUsadas.setPromptText("Horas usadas por dia (h)");
         txtTempo     = new TextField(); txtTempo.setPromptText("Tempo impressão (h)");
         txtMaoDeObra = new TextField(); txtMaoDeObra.setPromptText("Mão de obra (R$/h)");
         txtMargem    = new TextField(); txtMargem.setPromptText("Margem de lucro (%)");
@@ -143,9 +145,10 @@ public class MainApp extends Application {
         grid.addRow(0, new Label("Material:"),     comboMaterial);
         grid.addRow(1, new Label("Densidade:"),    comboDensidade);
         grid.addRow(2, new Label("Peso (g):"),     txtPeso);
-        grid.addRow(3, new Label("Tempo (h):"),    txtTempo);
-        grid.addRow(4, new Label("Mão de obra:"),  txtMaoDeObra);
-        grid.addRow(5, new Label("Margem (%):"),   txtMargem);
+        grid.addRow(3, new  Label("Horas usadas (h):"), txtHorasUsadas);
+        grid.addRow(4, new Label("Tempo (h):"),    txtTempo);
+        grid.addRow(5, new Label("Mão de obra:"),  txtMaoDeObra);
+        grid.addRow(6, new Label("Margem (%):"),   txtMargem);
 
         Button btnCalcular = new Button("Calcular custos");
         btnCalcular.setMaxWidth(Double.MAX_VALUE);
