@@ -1,47 +1,187 @@
-/* Variáveis globais de cores com acabamento fosco */
 .root {
-    -fx-cinza-fosco-escuro: #3A3B3C;
-    -fx-cinza-fosco-medio: #808080;
-    -fx-cinza-fosco-claro: #A9A9A9;
-    -fx-borda-suave: #d0d8f0;
-}
-
-/* Títulos das seções em destaque */
-.titulo-secao {
-    -fx-font-weight: bold;
-    -fx-text-fill: -fx-cinza-fosco-escuro;
+    -fx-background-color: #f4f6f9;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
     -fx-font-size: 13px;
 }
 
-/* O botão calcular profissionalizado */
+.contorno-secoes {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dde3ed;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);
+}
+
+/* --- Titulo das seções --- */
+.contorno-secoes > .label:first-child {
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-text-fill: #2d3748;
+    -fx-padding: 0 0 4 0;
+}
+
+.label {
+    -fx-text-fill: #4a5568;
+}
+
+.text-field {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #cbd5e0;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-width: 1;
+    -fx-padding: 5 8;
+    -fx-text-fill: #2d3748;
+}
+
+.text-field:focused {
+    -fx-border-color: #4299e1;
+    -fx-background-color: #ebf8ff;
+    -fx-effect: dropshadow(gaussian, rgba(66,153,225,0.3), 4, 0, 0, 0);
+}
+
+.combo-box {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #cbd5e0;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-border-width: 1;
+}
+
+.combo-box:focused {
+    -fx-border-color: #4299e1;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #2d3748;
+    -fx-padding: 4 8;
+}
+
 .botao-calcular {
-    -fx-background-color: -fx-cinza-fosco-medio;
+    -fx-background-color: #2b6cb0;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-padding: 8px 16px;
-    -fx-background-radius: 4px;
+    -fx-font-size: 13px;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-cursor: hand;
+    -fx-padding: 8 0;
 }
 
 .botao-calcular:hover {
-    -fx-background-color: #696969; /* Efeito ao passar o mouse */
+    -fx-background-color: #2c5282;
+    -fx-effect: dropshadow(gaussian, rgba(43,108,176,0.4), 6, 0, 0, 2);
+}
+
+.botao-calcular:pressed {
+    -fx-background-color: #1a365d;
+}
+
+/* --- Botão limpar */
+.button {
+    -fx-background-color: #e2e8f0;
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 13px;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
     -fx-cursor: hand;
+    -fx-padding: 8 0;
 }
 
-/* O bloco de resumo que estava hardcoded no seu Java */
-.bloco-resumo {
-    -fx-border-color: -fx-borda-suave;
-    -fx-border-radius: 6px;
-    -fx-background-radius: 6px;
-    /* Descomente a linha abaixo se quiser aplicar o fundo cinza claro fosco */
-    /* -fx-background-color: -fx-cinza-fosco-claro; */
+.button:hover {
+    -fx-background-color: #cbd5e0;
 }
 
-/* Destacando os labels de preço final */
-.label-destaque {
+/* --- separador de seções --- */
+.separator .line {
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 1;
+}
+
+/* --- Validação de erro --- */
+.destaque-erro {
+    -fx-border-color: #e53e3e;
+    -fx-background-color: #fff5f5;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.aviso-erro {
+    -fx-text-fill: #c53030;
     -fx-font-weight: bold;
-    -fx-text-fill: -fx-cinza-fosco-escuro;
+    -fx-font-size: 12px;
 }
 
-.contorno-secoes{
-     -fx-border-color: #d0d8f0;
-}    -fx-border-radius: 6;
+.label-info-impressora {
+    -fx-text-fill: #4a5568;
+    -fx-font-size: 12px;
+}
+
+/* --- Custo total --- */
+.label-total{
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+.box-total{
+    -fx-background-color: #950606;
+    -fx-background-radius: 6;
+}
+
+/* --- Valor de venda --- */
+.label-venda{
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+.box-venda{
+    -fx-background-color: #276749;
+    -fx-background-radius: 6;
+}
+
+/* --- Estilização bolinhas --- */
+.val-material{
+    -fx-text-fill: #276749;
+    -fx-font-weight: bold;
+}
+
+.val-maquina{
+    -fx-text-fill: #2b6cb0;
+    -fx-font-weight: bold;
+}
+
+.val-energia{
+    -fx-text-fill: #c05621;
+    -fx-font-weight: bold;
+}
+
+.val-manutencao{
+    -fx-text-fill: #553c9a;
+    -fx-font-weight: bold;
+}
+
+.val-mao-obra{
+    -fx-text-fill: #b7791f;
+    -fx-font-weight: bold;
+}
+
+.val-cinza{
+    -fx-text-fill: #a0aec0;
+    -fx-font-style: italic;
+}
+
+.val-azul{
+    -fx-text-fill: #2b6cb0;
+    -fx-font-weight: bold;
+}
+
+
+
+
+.label-resumo-valor{
+    -fx-font-weight: bold;
+    -fx-text-fill: #2b6cb0;
+}

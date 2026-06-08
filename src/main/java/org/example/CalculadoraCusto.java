@@ -1,6 +1,7 @@
-package org.example; /* Todas as classes estão importadas desse pacote.
-    Significa que elas se enxergam  automaticamente. Permitindo as passagens de objeto como parâmetro existentes nessa classe
-    Esse conceito é chamado de "associação" em POO*/
+package org.example; /* Todas as classes pertencem a esse pacote.
+    Por isso se enxergam automaticamente, sem necessidade de import.
+    Isso permite a passagem de objetos de outras classes como parâmetro.
+    Esse conceito é chamado de "associação" em POO.*/
 
 public class CalculadoraCusto {
 
@@ -18,7 +19,7 @@ public class CalculadoraCusto {
     }
 
     public double custoMaoDeObra(ProjetoImpressao objProjeto) {
-        return objProjeto.getHorasImpressao() * objProjeto.getValorMaoDeObra(); // retorna o que seria a variavel custo_mao_obra
+        return objProjeto.getValorMaoDeObra();  // retorna o que seria a variavel custo_mao_obra
     }
 
     public double taxaFalha(double material_previsto){
