@@ -19,18 +19,24 @@ public class CalculadoraCusto {
     }
 
     public double custoMaoDeObra(ProjetoImpressao objProjeto) {
-        return objProjeto.getValorMaoDeObra();  // retorna o que seria a variavel custo_mao_obra
+        return objProjeto.getHorasImpressao() * objProjeto.getValorMaoDeObra(); // retorna o que seria a variavel custo_mao_obra
     }
 
     public double taxaFalha(double material_previsto){
         return material_previsto * 1.10; // retorna o que seria a variavel material_real
     }
 
-    public double margemLucro(double custo_total){
-        return custo_total * 1.30; // retorna o que seria a variavel valor_venda
+    public double margemLucro(double custo_total, double margemPercent) {
+        return custo_total * (1 + margemPercent / 100); // retorna o que seria a variavel valor_venda
     }
 
     public double custoTotal(double custo_material, double custo_maquina, double custo_energia, double custo_mao_manutencao, double custo_mao_obra){
         return custo_material + custo_maquina + custo_energia + custo_mao_manutencao + custo_mao_obra; // retorna o que seria a variavel custo_total_final
     }
+
+    public double custoManutencao(double horasImpressao) {
+        return 0.50 * horasImpressao;
+    }
+
+
 }

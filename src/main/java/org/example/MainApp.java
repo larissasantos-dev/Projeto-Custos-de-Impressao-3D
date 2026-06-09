@@ -52,7 +52,7 @@ public class MainApp extends Application {
     private Label valCustoManuntecao;
     private Label valCustoMaoDeObra;
 
-    private Label lbAvisoValidacao = new Label("");
+    private Label lbAvisoValidacao;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -211,6 +211,8 @@ public class MainApp extends Application {
         botoesCL.setMaxWidth(Double.MAX_VALUE);
         HBox.setHgrow(btnCalcular, Priority.ALWAYS);
         HBox.setHgrow(btnLimpar, Priority.ALWAYS);
+
+        lbAvisoValidacao = new Label("");
 
         secao.getChildren().addAll(
                 titulo,
@@ -450,6 +452,12 @@ public class MainApp extends Application {
             return false;
         }
 
+        if (comboMaterial.getSelectionModel().isEmpty()) {
+            lbAvisoValidacao.getStyleClass().add("aviso-erro");
+            lbAvisoValidacao.setText("Selecione um material.");
+            return false;
+        }
+
         if (!valido) {
             lbAvisoValidacao.getStyleClass().add("aviso-erro");
             lbAvisoValidacao.setText("Preencha os campos destacados em vermelho.");
@@ -541,13 +549,14 @@ public class MainApp extends Application {
             );
 
             // --- Calcula cada custo ---
-            double cusMaterial = calculadora.custoMaterial(materialSelecionado, peso);
+            double pesoComFalha = calculadora.taxaFalha(peso);
+            double cusMaterial = calculadora.custoMaterial(materialSelecionado, pesoComFalha);
             double cusMaquina = calculadora.custoMaquinaHora(impressoraSelecionada, horasUso) * horasImpressao;
             double cusEnergia = calculadora.custoEnergia(impressoraSelecionada, projeto, custoKwh);
             double cusMaoDeObra = calculadora.custoMaoDeObra(projeto);
-            double cusManutencao = 0.50 * horasImpressao; // 50 centavos à hora
+            double cusManutencao = calculadora.custoManutencao(horasImpressao); // 50 centavos à hora
             double cusTotal = calculadora.custoTotal(cusMaterial, cusMaquina, cusEnergia, cusManutencao, cusMaoDeObra);
-            double valorVenda = calculadora.margemLucro(cusTotal);
+            double valorVenda = calculadora.margemLucro(cusTotal, margem);
 
             // --- Atualiza os labels do painel direito ---
             valCustoMaterial.setText("R$ " + String.format("%.2f", cusMaterial));
@@ -560,9 +569,16 @@ public class MainApp extends Application {
             lbValorVenda.setText("R$ " + String.format("%.2f", valorVenda));
 
             lbResImpressora.setText(impressoraSelecionada.getModeloImpressora());
-            lbResMaterial.setText(materialSelecionado.getTipoMaterial() + " - " + materialSelecionado.getDensidade());
-            lbResPeso.setText(String.format("%.0f g", peso * 1.10));
+            String[] densidades = {"Baixa", "Média", "Alta"};
+            String densidadeTexto = densidades[idxMaterial];
+            lbResMaterial.setText(materialSelecionado.getTipoMaterial() + " - " + densidadeTexto);
+            lbResPeso.setText(String.format("%.0f g", calculadora.taxaFalha(peso)));
             lbResLucro.setText("R$ " + String.format("%.2f", valorVenda - cusTotal));
+
+            for (Label val : new Label[]{lbResImpressora, lbResMaterial, lbResPeso, lbResLucro}) {
+                val.getStyleClass().remove("val-cinza");
+                val.getStyleClass().add("val-azul");
+            }
 
             atualizarComparacao(peso, horasImpressao, horasUso, materialSelecionado, projeto, custoKwh);
 
@@ -570,6 +586,7 @@ public class MainApp extends Application {
             lbAvisoValidacao.setText("Digite apenas números nos campos numéricos.");
             lbAvisoValidacao.getStyleClass().add("aviso-erro");
         }
+
     }
 
     private void atualizarComparacao(double peso, double horasImpressao, double horasUso,
@@ -581,7 +598,7 @@ public class MainApp extends Application {
             double maq = calculadora.custoMaquinaHora(impressora, horasUso) * horasImpressao;
             double en = calculadora.custoEnergia(impressora, projeto, custoKwh);
             double maoOB = calculadora.custoMaoDeObra(projeto);
-            double man = 0.50 * horasImpressao;
+            double man = calculadora.custoManutencao(horasImpressao);
             double total = calculadora.custoTotal(mat, maq, en, man, maoOB);
 
             String valor = "R$ " + String.format("%.2f", total);
@@ -651,14 +668,10 @@ public class MainApp extends Application {
             lbResPeso.setText("- calcule primeiro");
             lbResLucro.setText("- calcule primeiro");
 
-            for (Label lbEstilo : new Label[]{lbCompEnder, lbCompK1, lbCompBambu, lbResImpressora, lbResMaterial, lbResPeso, lbResLucro}) {
-                lbEstilo.getStyleClass().remove("val-azul");
+            for (Label lbEstilo : new Label[]{lbCompEnder, lbCompK1, lbCompBambu,
+                    lbResImpressora, lbResMaterial, lbResPeso, lbResLucro}) {
+                lbEstilo.getStyleClass().removeAll("val-azul", "val-cinza");
                 lbEstilo.getStyleClass().add("val-cinza");
-            }
-
-            TextField[] campos = {txtPeso, txtTempo, txtMaoDeObra, txtMargem};
-            for (TextField campoTXT : campos) {
-                campoTXT.getStyleClass().remove("destaque-erro");
             }
         }
 
